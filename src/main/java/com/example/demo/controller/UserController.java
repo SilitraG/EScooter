@@ -1,6 +1,7 @@
-package com.example.demo.user;
+package com.example.demo.controller;
 
-import jakarta.transaction.Transactional;
+import com.example.demo.model.User;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
