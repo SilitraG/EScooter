@@ -17,11 +17,17 @@ public class UserConfig {
             User florin = new User(
                     "Florin",
                     "florin@yahoo.com",
+                    "florin",
+                    "parola",
+                    Role.ADMIN,
                     LocalDate.of(1998, Month.SEPTEMBER, 23)
             );
             User raluca = new User(
                     "Raluca",
                     "raluca@gmail.com",
+                    "iulica",
+                    "parola2",
+                    Role.USER,
                     LocalDate.of(2002, Month.JULY, 3)
             );
 
