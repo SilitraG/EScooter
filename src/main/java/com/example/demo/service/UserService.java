@@ -31,20 +31,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
-
-    public void addNewUser(User user) {
-        Optional<User> userByEmailOptional = userRepository.findUserByEmail(user.getEmail());
-        Optional<User> userByUsernameOptional = userRepository.findUserByUsername(user.getEmail());
-
-        if(userByUsernameOptional.isPresent()){
-            throw new IllegalStateException("Username already taken");
-        }
-
-        if(userByEmailOptional.isPresent()){
-            throw new IllegalStateException("Email already taken");
-        }
-        userRepository.save(user);
-    }
     public void deleteUser(Long userId){
         boolean exists = userRepository.existsById(userId);
         if(!exists){
