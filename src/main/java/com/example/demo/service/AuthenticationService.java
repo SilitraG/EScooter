@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.AuthenticationResponse;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,11 +40,11 @@ public class AuthenticationService {
         Optional<User> userByUsernameOptional = userRepository.findUserByUsername(user.getUsername());
 
         if(userByUsernameOptional.isPresent()){
-            throw new IllegalStateException("Username already taken");
+            return new AuthenticationResponse("Username already taken");
         }
 
         if(userByEmailOptional.isPresent()){
-            throw new IllegalStateException("Email already taken");
+            return new AuthenticationResponse("Email already taken");
         }
 
         user = userRepository.save(user);
