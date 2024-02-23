@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping
+@RequestMapping(path = "api/user")
 public class UserController {
     private final UserService userService;
 
@@ -18,16 +19,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/get_users")
+    @GetMapping("/get_all")
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @DeleteMapping(path = "/delete_user/{userId}")
+    @DeleteMapping("/delete/{userId}")
     public void deleteUser(@PathVariable("userId") Long userId){
         userService.deleteUser(userId);
     }
-    @PutMapping(path = "/update_user/{userId}")
+    @PutMapping("/update/{userId}")
     public void updateUser(@PathVariable("userId") Long userId,
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String email){
