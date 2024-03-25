@@ -4,12 +4,12 @@ import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from "yup";
 import { loginUserAction } from '../../Redux/Auth/auth.action';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min'
 
-const initialValues={email:"", password:""};
+const initialValues={username:"", password:""};
 const validationSchema={
-    email:Yup.string()
-             .email("Invalid email")
-             .required("Email is required"),
+    username:Yup.string()
+                .required("Username is required"),
     password:Yup.string()
                 .min(6, "Password must be at least 6 characters")
                 .required("Password is required"),
@@ -36,9 +36,9 @@ const Login = () => {
                 <div>
                     <Field 
                         as={TextField}
-                        name="email" 
-                        placeholder="Email" 
-                        type="email" 
+                        name="username" 
+                        placeholder="Username" 
+                        type="text"
                         fullWidth
                     />
                     <ErrorMessage 
@@ -71,8 +71,13 @@ const Login = () => {
             >
                 Login
             </Button>
+
         </Form>
     </Formik>
+    <div className="flex gap-2 items-center justify-center pt-5">
+        <p>You don't have account?</p>
+        <Link to="/register">Register</Link>
+    </div>
     </>
   );
 };
