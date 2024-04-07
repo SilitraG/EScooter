@@ -19,16 +19,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/get_all")
+    @GetMapping
     public List<User> getUsers(){
         return userService.getUsers();
     }
 
-    @DeleteMapping("/delete/{userId}")
+    @DeleteMapping("/{userId}")
     public void deleteUser(@PathVariable("userId") Long userId){
         userService.deleteUser(userId);
     }
-    @PutMapping("/update/{userId}")
+    @PutMapping("/{userId}")
     public void updateUser(@PathVariable("userId") Long userId,
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String email){
