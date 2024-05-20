@@ -7,9 +7,8 @@ export const loginUserAction=(loginData)=>async(dispatch)=>{
     try{
         const {data}=await api.post(`/login`, loginData.data)
 
-        if(data.jwt){
-            localStorage.setItem("jwt",data.jwt)
-
+        if(data.token){
+            localStorage.setItem("token", data.token)
         }
         console.log("login succes", data)
         dispatch({type:LOGIN_SUCCES, payload:data.jwt})

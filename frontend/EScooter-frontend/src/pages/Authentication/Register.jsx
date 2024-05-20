@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from "yup";
 import { registerUserAction } from '../../Redux/Auth/auth.action';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
 const initialValues={name:"", email:"", username:"", password:"", role:"USER", dob:""};
 const validationSchema={
@@ -18,12 +18,15 @@ const validationSchema={
 const Register = () => {
     const [role, setRole] = useState("USER");
     const dispatch=useDispatch();
+    const history = useHistory();
 
     const handleSubmit = (values) => {
         values.role=role;
         console.log("handle submit", values);
 
         dispatch(registerUserAction({data:values}))
+
+        history.push('/login');
     };
   return (
     <>
@@ -120,9 +123,18 @@ const Register = () => {
             </Button>
         </Form>
     </Formik>
-    <div className="flex gap-2 items-center justify-center pt-5">
+    <div className="flex gap-10 items-center justify-center pt-6">
         <p>You already have an account?</p>
-        <Link to="/login">Login</Link>
+        <Link to="/login">
+            <Button 
+                sx={{ padding: ".8rem 2rem" }} 
+                fullWidth
+                variant="contained" 
+                color="primary"
+            >
+            Login
+            </Button>
+        </Link>
     </div>
     </>
   );
