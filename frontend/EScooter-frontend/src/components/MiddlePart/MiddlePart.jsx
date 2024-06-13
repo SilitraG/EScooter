@@ -7,11 +7,11 @@ import React, {useState} from 'react'
 function getColorForSeverity(severity) {
   switch (severity) {
     case 1:
-      return 'yellow'; // Culoarea pentru severitate 1
+      return 'yellow';
     case 2:
-      return 'orange'; // Culoarea pentru severitate 2
+      return 'orange';
     case 3:
-      return 'red'; // Culoarea pentru severitate 3
+      return 'red';
   }
 }
 
@@ -34,7 +34,7 @@ const MiddlePart = ({ obstacleCoordinates }) => {
                  glyphColor={getColorForSeverity(obstacle.severity)}
                  />
 
-            {open && (
+            {open && obstacleCoordinates[index].description && (
             <InfoWindow position={{ lat: obstacle.lat, lng: obstacle.lng }} onCloseClick={() => setOpen(false)}>
               <p>{obstacleCoordinates[index].description}</p>
             </InfoWindow>
