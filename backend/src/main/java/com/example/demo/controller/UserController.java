@@ -28,6 +28,7 @@ public class UserController {
     public void deleteUser(@PathVariable("userId") Long userId){
         userService.deleteUser(userId);
     }
+
     @PutMapping("/{userId}")
     public void updateUser(@PathVariable("userId") Long userId,
                            @RequestParam(required = false) String name,

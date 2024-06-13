@@ -11,7 +11,7 @@ export const loginUserAction=(loginData)=>async(dispatch)=>{
             localStorage.setItem("token", data.token)
         }
         console.log("login succes", data)
-        dispatch({type:LOGIN_SUCCES, payload:data.jwt})
+        dispatch({type:LOGIN_SUCCES, payload:data.token})
 
     } catch (error) {
         console.log("------", error)
@@ -24,12 +24,12 @@ export const registerUserAction=(loginData)=>async(dispatch)=>{
     try{
         const {data}=await api.post(`/register`, loginData.data)
 
-        if(data.jwt){
-            localStorage.setItem("jwt",data.jwt)
+        if(data.token){
+            localStorage.setItem("jwt",data.token)
 
         }
         console.log("register succes", data)
-        dispatch({type:REGISTER_SUCCES, payload:data.jwt})
+        dispatch({type:REGISTER_SUCCES, payload:data.token})
 
     } catch (error) {
         console.log("------", error)

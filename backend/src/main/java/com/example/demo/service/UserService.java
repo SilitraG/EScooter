@@ -31,6 +31,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
     public void deleteUser(Long userId){
         boolean exists = userRepository.existsById(userId);
         if(!exists){
