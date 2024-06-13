@@ -1,4 +1,4 @@
-import { Card, Grid } from '@mui/material'
+import { Card, Grid, Typography } from '@mui/material'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min'
 import React from 'react'
 import Login from './Login'
@@ -7,35 +7,43 @@ import HomePage from '../HomePage/HomePage'
 
 const Authentication = () => {
   return (
-    <div>
-        <Router>
-            <Switch>
-                <Route exact path='/home'> <HomePage/> </Route>
-            </Switch>
-        <Grid container>
-            <Grid className='h-screen overflow-hidden' item xs={7}>
-                <img className='w-full' src="https://cdn.pixabay.com/photo/2021/08/19/23/08/segway-6559163_1280.png" alt="" />
-                <div classname='flex gap-10 items-center justify-center pt-6'>
-                    <p className='text-center '> You already have an account?</p>
-                </div>
-            </Grid>
-            <Grid item xs={5}>
-                <div className='px-20 flex flex-col justify-center h-full'>
-                    <Card className='card p-10'>
-                        <div className='flex flex-col items-center mb-5 space-y-1'>
-                            <h1 className='logo text-center'>EScooter</h1>
-                            <p className='text-center text-sm w-[70&]'>Connecting Lives, Sharing Information</p>
-                        </div>
-                        <Switch>
-                            <Route exact path='/register'> <Register/> </Route>
-                            <Route exact path='/login'> <Login/> </Route>
-                            <Route exact path='/'> <Login/> </Route>
-                        </Switch>                        
-                    </Card>
-                </div>
-            </Grid>
+    <div 
+      style={{ 
+        minHeight: '100vh', 
+        backgroundImage: 'url(https://cdn.pixabay.com/photo/2024/04/09/04/56/ai-generated-8685053_960_720.png)', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center' 
+      }}
+    >
+      <Router>
+        <Switch>
+          <Route exact path='/home'> <HomePage /> </Route>
+        </Switch>
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item xs={11} sm={8} md={5} lg={4}>
+            <Card 
+              className='p-6 md:p-10' 
+              style={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+                backdropFilter: 'blur(10px)' 
+              }}
+            >
+              <div className='flex flex-col items-center space-y-1'>
+                <Typography variant="h4" className='logo text-center'>EScooter</Typography>
+                <Typography variant="body2" className='text-center'>Connecting Lives, Sharing Information</Typography>
+              </div>
+              <Switch>
+                <Route exact path='/register'> <Register /> </Route>
+                <Route exact path='/login'> <Login /> </Route>
+                <Route exact path='/'> <Login /> </Route>
+              </Switch>
+            </Card>
+          </Grid>
         </Grid>
-        </Router>
+      </Router>
     </div>
   )
 }
