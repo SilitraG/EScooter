@@ -1,33 +1,25 @@
-import './App.css'
-import Authentication from './pages/Authentication/Authentication'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min'
-import HomePage from './pages/HomePage/HomePage'
-import Footer from './pages/footer'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Authentication from './pages/Authentication/Authentication';
+import HomePage from './pages/HomePage/HomePage';
 
-function App() {
-
-  return (
-    <Router>
-      <div className="">
-          
-          <div className='content'>
-            <Switch>
-              <Route exact path="/home"> <HomePage/> </Route>
-              <Route exact path="/ride"> <HomePage/> </Route>
-              <Route exact path="/profile/:id"> <HomePage/> </Route>
-              <Route exact path='/register'> <Authentication/> </Route>
-              <Route exact path='/login'> <Authentication/> </Route>
-              <Route exact path="/*"> <Authentication/> </Route>
-            </Switch>
-          </div>
-          
-          <Footer/>
-          
-      </div>
-
-    </Router>
+const App = () => {
+    const jwt = useSelector(state => state.auth.jwt);
     
-  )
-}
 
-export default App
+    return (
+        <Router>
+            <Switch>
+                <Route path='/login' component={Authentication} />
+                <Route path='/register' component={Authentication} />
+                <Route path='/home'>
+                    {!jwt ? <HomePage /> : <Redirect to='/login' />}
+                </Route>
+                <Redirect from='/' to='/login' />
+            </Switch>
+        </Router>
+    );
+};
+
+export default App;

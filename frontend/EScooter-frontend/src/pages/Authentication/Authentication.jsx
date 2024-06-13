@@ -19,9 +19,6 @@ const Authentication = () => {
       }}
     >
       <Router>
-        <Switch>
-          <Route exact path='/home'> <HomePage /> </Route>
-        </Switch>
         <Grid container justifyContent="center" alignItems="center">
           <Grid item xs={11} sm={8} md={5} lg={4}>
             <Card 

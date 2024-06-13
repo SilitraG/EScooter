@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
-import { Switch, FormControlLabel, FormGroup } from '@mui/material';
-import { Avatar, Button, Card, Divider, Menu, MenuItem } from '@mui/material'
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import React, { useState } from 'react';
+import { Switch, FormControlLabel, Card, useMediaQuery, useTheme } from '@mui/material';
 import api from '../../config/api';
 
 const HomeRigth = ({ obstacleCoordinates, setObstacleCoordinates }) => {
@@ -16,7 +14,7 @@ const HomeRigth = ({ obstacleCoordinates, setObstacleCoordinates }) => {
     if (event.target.name === 'obstacole') {
       if(event.target.checked) {
         try {
-          const {data} = await api.get(`/obstacle`);
+          const { data } = await api.get(`/obstacle`);
           
           const newObstacleCoordinates = data.map((obstacle) => ({
             lat: obstacle.lat,
@@ -36,25 +34,43 @@ const HomeRigth = ({ obstacleCoordinates, setObstacleCoordinates }) => {
     }
   };
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
-    <Card className='card h-screen flex-col justify-between py-5'>
-        <div className='flex flex-col space-y-4 ml-4 mr-10'>
-          <FormControlLabel
-            control={<Switch checked={state.obstacole} onChange={handleChange} name="obstacole" />}
-            label="Obstacole"
-          />
-          <FormControlLabel
-            control={<Switch checked={state.vehicule} onChange={handleChange} name="vehicule" />}
-            label="Vehicule"
-          />
-          <FormControlLabel
-            control={<Switch checked={state.parcari} onChange={handleChange} name="parcari" />}
-            label="Parcari"
-          />
-        </div>
-        
+    <Card
+      style={{
+        height: isMobile ? 'auto' : '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        padding: '16px'
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: isMobile ? '8px' : '16px',
+          marginLeft: '16px',
+          marginRight: '16px'
+        }}
+      >
+        <FormControlLabel
+          control={<Switch checked={state.obstacole} onChange={handleChange} name="obstacole" />}
+          label="Obstacole"
+        />
+        <FormControlLabel
+          control={<Switch checked={state.vehicule} onChange={handleChange} name="vehicule" />}
+          label="Vehicule"
+        />
+        <FormControlLabel
+          control={<Switch checked={state.parcari} onChange={handleChange} name="parcari" />}
+          label="Parcari"
+        />
+      </div>
     </Card>
   )
 }
 
-export default HomeRigth
+export default HomeRigth;
