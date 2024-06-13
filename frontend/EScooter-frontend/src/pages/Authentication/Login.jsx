@@ -1,10 +1,10 @@
 import { Box, Button, TextField, Grid, Typography } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from "yup";
 import { loginUserAction } from '../../Redux/Auth/auth.action';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min'
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useHistory } from 'react-router-dom';
 
 const initialValues = { username: "", password: "" };
@@ -18,13 +18,13 @@ const validationSchema = Yup.object().shape({
 
 const Login = () => {
     const history = useHistory();
-    const [formValue, setFormValue] = useState();
     const dispatch = useDispatch();
 
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("handle submit", values);
-        dispatch(loginUserAction({ data: values }))
-        history.push('/home');
+        dispatch(loginUserAction({ data: values })).then(() => {
+            history.push('/home', { userName: values.username });
+        });
     };
 
     return (

@@ -1,10 +1,10 @@
 import React from 'react';
-import { navigationMenu } from './SidebarNavigation';
 import { Avatar, Button, Card, Divider, Menu, MenuItem, useMediaQuery, useTheme } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { navigationMenu } from './SidebarNavigation';
 
-const Sidebar = () => {
+const Sidebar = ({ userName }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -25,6 +25,8 @@ const Sidebar = () => {
     handleClose();
   };
 
+  const menuItems = navigationMenu(userName);
+
   return (
     <Card 
       style={{
@@ -40,7 +42,7 @@ const Sidebar = () => {
           <span className='logo' style={{ fontWeight: 'bold', fontSize: '24px' }}>EScooter</span>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {navigationMenu.map((item, index) => (
+          {menuItems.map((item, index) => (
             <Link key={index} to={item.path} style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
               {item.icon}
               <p style={{ fontSize: '16px' }}>{item.title}</p>
@@ -56,7 +58,7 @@ const Sidebar = () => {
             <Avatar src="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png" />
             <div>
               <p style={{ fontWeight: 'bold' }}>Nume User...</p>
-              <p style={{ opacity: '0.7' }}>@user</p>
+              <p style={{ opacity: '0.7' }}>@{userName}</p>
             </div>
           </div>
           <Button
