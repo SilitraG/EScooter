@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Switch, FormControlLabel, Card, useMediaQuery, useTheme } from '@mui/material';
 import api from '../../config/api';
 

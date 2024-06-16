@@ -1,6 +1,6 @@
 import { Button, TextField, Grid } from '@mui/material';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as Yup from "yup";
 import { registerUserAction } from '../../Redux/Auth/auth.action';

@@ -15,7 +15,7 @@ export const navigationMenu = (username) => [
         title: "Profile",
         icon: <AccountCircleIcon />,
         path: {
-            pathname: "/profile/:id",
+            pathname: "/profile",
             state: { userName: username }
         }
     },

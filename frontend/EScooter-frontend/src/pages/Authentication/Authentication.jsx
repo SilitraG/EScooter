@@ -1,9 +1,7 @@
 import { Card, Grid, Typography } from '@mui/material'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min'
-import React from 'react'
 import Login from './Login'
 import Register from './Register'
-import HomePage from '../HomePage/HomePage'
 
 const Authentication = () => {
   return (

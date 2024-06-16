@@ -1,8 +1,7 @@
 "use client";
 
-import { BorderColor } from '@mui/icons-material';
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 function getColorForSeverity(severity) {

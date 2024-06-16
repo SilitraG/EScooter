@@ -1,6 +1,12 @@
-import axios from "axios"
 import api from "../../config/api"
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCES, REGISTER_REQUEST, REGISTER_FAILURE, REGISTER_SUCCES } from "./auth.actionType"
+
+export const LOGIN_REQUEST="LOGIN_REQUEST";
+export const LOGIN_SUCCES="LOGIN_SUCCES";
+export const LOGIN_FAILURE="LOGIN_FAILURE";
+
+export const REGISTER_REQUEST="REGISTER_REQUEST";
+export const REGISTER_SUCCES="REGISTER_SUCCES";
+export const REGISTER_FAILURE="REGISTER_FAILURE";
 
 export const loginUserAction=(loginData)=>async(dispatch)=>{
     dispatch({type:LOGIN_REQUEST})

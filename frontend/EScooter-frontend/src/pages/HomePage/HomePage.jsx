@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import { Grid } from '@mui/material';
 import { useLocation, Route, Switch, Redirect } from 'react-router-dom/cjs/react-router-dom.min';
@@ -26,7 +26,7 @@ const HomePage = () => {
         <Grid item xs={12} lg={7} className='flex justify-center'>
           <Switch>
             <Route exact path="/ride" render={(props) => <Ride {...props} userName={userName} />} />
-            <Route exact path="/profile/:id" render={(props) => <Profile {...props} userName={userName} />} />
+            <Route exact path="/profile" render={(props) => <Profile {...props} userName={userName} />} />
             <Route exact path="/home">
               <MiddlePart obstacleCoordinates={obstacleCoordinates} />
             </Route>
@@ -41,7 +41,7 @@ const HomePage = () => {
           <div className='top-0'>
             <Switch>
               <Route exact path="/ride" render={(props) => <RRide {...props} userName={userName} />} />
-              <Route exact path="/profile/:id" render={(props) => <RProfile {...props} userName={userName} />} />
+              <Route exact path="/profile" render={(props) => <RProfile {...props} userName={userName} />} />
               <Route exact path="/home">
                 <HomeRigth obstacleCoordinates={obstacleCoordinates} setObstacleCoordinates={setObstacleCoordinates} />
               </Route>
