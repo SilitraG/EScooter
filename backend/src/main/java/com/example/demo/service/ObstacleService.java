@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,6 +23,44 @@ public class ObstacleService {
         return obstacleRepository.findAll();
     }
 
+    public List<Obstacle> getMergedObstacles() {
+        List<Obstacle> allObstacles = obstacleRepository.findAll();
+        List<Obstacle> mergedObstacles = new ArrayList<>();
+
+        while (!allObstacles.isEmpty()) {
+            Obstacle reference = allObstacles.get(0);
+            int totalAppearances = reference.getAppearances();
+
+            List<Obstacle> cluster = new ArrayList<>();
+            cluster.add(reference);
+
+            for (int i = 1; i < allObstacles.size(); i++) {
+                Obstacle candidate = allObstacles.get(i);
+                if (Math.abs(candidate.getLat() - reference.getLat()) <= 0.00003 &&
+                        Math.abs(candidate.getLng() - reference.getLng()) <= 0.00003) {
+
+                    totalAppearances += candidate.getAppearances();
+                    cluster.add(candidate);
+                }
+            }
+
+            reference.setAppearances(totalAppearances);
+
+            allObstacles.removeAll(cluster);
+
+            for (Obstacle obs : cluster) {
+                if (!obs.getId().equals(reference.getId())) {
+                    obstacleRepository.delete(obs);
+                }
+            }
+            obstacleRepository.save(reference);
+
+            mergedObstacles.add(reference);
+        }
+
+        return mergedObstacles;
+    }
+
     public Obstacle loadObstacleById(Long Id) throws Exception {
         return obstacleRepository.findObstacleById(Id)
                 .orElseThrow(() -> new Exception("Scooter not found"));
@@ -34,8 +73,12 @@ public class ObstacleService {
         obstacleRepository.deleteById(Id);
     }
 
+    public void deleteObstacles(){
+        obstacleRepository.deleteAll();
+    }
+
     @Transactional
-    public void updateObstacle(Long Id, Double lat, Double lng, Integer severity, String description) {
+    public void updateObstacle(Long Id, Double lat, Double lng, Integer appearances) {
         Obstacle obstacle = obstacleRepository.findById(Id).
                 orElseThrow(() -> new IllegalStateException("Scooter with id " + Id + " does not exists"));
 
@@ -47,12 +90,8 @@ public class ObstacleService {
             obstacle.setLng(lng);
         }
 
-        if(severity != null && severity != 0 && !Objects.equals(obstacle.getSeverity(), severity)){
-            obstacle.setSeverity(severity);
-        }
-
-        if(description != null && !description.isEmpty() && !Objects.equals(obstacle.getDescription(), description)){
-            obstacle.setDescription(description);
+        if(appearances != null && appearances != 0 && !Objects.equals(obstacle.getAppearances(), appearances)){
+            obstacle.setAppearances(appearances);
         }
     }
 

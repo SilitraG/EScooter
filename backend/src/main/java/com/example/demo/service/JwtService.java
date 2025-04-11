@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.model.User;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

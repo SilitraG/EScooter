@@ -3,9 +3,11 @@ package com.example.demo.service;
 import com.example.demo.model.AuthenticationResponse;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,18 +56,21 @@ public class AuthenticationService {
         return new AuthenticationResponse(token);
     }
 
-    public AuthenticationResponse   authenticate (User request)
-    {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
+    public AuthenticationResponse authenticate(User request) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(),
+                            request.getPassword()
+                    )
+            );
+        } catch (AuthenticationException ex) {
+            throw new BadCredentialsException("Invalid credentials", ex);
+        }
 
-        User user = userRepository.findUserByUsername(request.getUsername()).orElseThrow();
+        User user = userRepository.findUserByUsername(request.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String token = jwtService.generateToken(user);
-
         return new AuthenticationResponse(token);
     }
 }

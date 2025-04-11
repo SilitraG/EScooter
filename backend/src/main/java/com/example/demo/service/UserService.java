@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.User;
+import  com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,11 @@ import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final UserRepository userRepository;
 
     @Autowired
+    private final UserRepository userRepository;
+
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }

@@ -23,6 +23,9 @@ public class ObstacleController {
         return obstacleService.getObstacles();
     }
 
+    @GetMapping("/merge")
+    public List<Obstacle> getMergedObstacles(){return obstacleService.getMergedObstacles();}
+
     @PostMapping("/add")
     public void addNewObstacle(@RequestBody Obstacle obstacle){
         obstacleService.addNewObstacle(obstacle);
@@ -32,13 +35,17 @@ public class ObstacleController {
     public void deleteObstacle(@PathVariable("obstacleId") Long obstacleId){
         obstacleService.deleteObstacle(obstacleId);
     }
+
+    @DeleteMapping("/delete")
+    public void deleteObstacles(){
+        obstacleService.deleteObstacles();
+    }
+
     @PutMapping("/{obstacleId}")
     public void updateObstacle(@PathVariable("obstacleId") Long obstacleId,
                                @RequestParam(required = false) Double lat,
                                @RequestParam(required = false) Double lng,
-                               @RequestParam(required = false) Integer severity,
-                               @RequestParam(required = false) String description){
-        obstacleService.updateObstacle(obstacleId, lat, lng, severity, description);
-
+                               @RequestParam(required = false) Integer appearances){
+        obstacleService.updateObstacle(obstacleId, lat, lng, appearances);
     }
 }
