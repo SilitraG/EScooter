@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://backend.licentaescooter.com/api',
+    baseURL: 'https://localhost:8081/api',
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json'
