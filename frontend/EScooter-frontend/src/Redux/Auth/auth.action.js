@@ -31,7 +31,7 @@ export const registerUserAction=(loginData)=>async(dispatch)=>{
         const {data}=await api.post(`/register`, loginData.data)
 
         if(data.token){
-            localStorage.setItem("jwt",data.token)
+            localStorage.setItem("token",data.token)
 
         }
         console.log("register succes", data)

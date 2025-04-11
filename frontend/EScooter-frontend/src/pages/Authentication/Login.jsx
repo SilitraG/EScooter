@@ -22,6 +22,7 @@ const Login = () => {
     const handleSubmit = (values, { setSubmitting }) => {
         console.log("handle submit", values);
         dispatch(loginUserAction({ data: values })).then(() => {
+            localStorage.setItem("userName", values.username);
             history.push('/home', { userName: values.username });
         });
     };
@@ -83,7 +84,7 @@ const Login = () => {
                         sx={{ mt: 1, textAlign: 'center' }}
                     >
                         <Typography>
-                            You don't have an account?
+                            Do not have an account?
                         </Typography>
                         <Link to="/register">
                             <Button

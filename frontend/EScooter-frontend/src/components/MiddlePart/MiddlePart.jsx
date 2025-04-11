@@ -1,21 +1,7 @@
-"use client";
 
 import { APIProvider, Map, AdvancedMarker, Pin, InfoWindow } from '@vis.gl/react-google-maps';
 import { useState } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
-
-function getColorForSeverity(severity) {
-  switch (severity) {
-    case 1:
-      return 'yellow';
-    case 2:
-      return 'orange';
-    case 3:
-      return 'red';
-    default:
-      return 'blue';
-  }
-}
 
 const MiddlePart = ({ obstacleCoordinates }) => {
   const position = { lat: 47.15, lng: 27.58 };
@@ -34,13 +20,13 @@ const MiddlePart = ({ obstacleCoordinates }) => {
               position={{ lat: obstacle.lat, lng: obstacle.lng }}
               onClick={() => setOpen(true)}>
               <Pin
-                background={getColorForSeverity(obstacle.severity)}
-                borderColor={getColorForSeverity(obstacle.severity)}
-                glyphColor={getColorForSeverity(obstacle.severity)}
+                background={'black'}
+                borderColor={'black'}
+                glyphColor={'yellow'}
               />
-              {open && obstacleCoordinates[index].description && (
+              {open && (
                 <InfoWindow position={{ lat: obstacle.lat, lng: obstacle.lng }} onCloseClick={() => setOpen(false)}>
-                  <p>{obstacleCoordinates[index].description}</p>
+                  <p>{obstacleCoordinates[index].appearances}</p>
                 </InfoWindow>
               )}
             </AdvancedMarker>

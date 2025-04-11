@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Authentication from './pages/Authentication/Authentication';
@@ -11,14 +10,31 @@ const App = () => {
     return (
         <Router>
             <Switch>
-                <Route path='/login' component={Authentication} />
-                <Route path='/register' component={Authentication} />
-                <Route path='/profile' component={HomePage} />
-                <Route path='/ride' component={HomePage} />
-                <Route path='/home'>
-                    {!jwt ? <HomePage /> : <Redirect to='/login' />}
+                <Route path="/login">
+                    {jwt ? <Redirect to="/home" /> : <Authentication />}
                 </Route>
-                <Redirect from='/' to='/login' />
+                
+                <Route path="/register">
+                    {jwt ? <Redirect to="/home" /> : <Authentication />}
+                </Route>
+
+                <Route path="/home">
+                    {jwt ? <HomePage /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/profile">
+                    {jwt ? <HomePage /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route path="/ride">
+                    {jwt ? <HomePage /> : <Redirect to="/login" />}
+                </Route>
+
+                <Route exact path="/">
+                    {jwt ? <Redirect to="/home" /> : <Redirect to="/login" />}
+                </Route>
+
+                <Redirect to="/login" />
             </Switch>
         </Router>
     );
