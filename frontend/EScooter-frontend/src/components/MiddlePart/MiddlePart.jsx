@@ -11,9 +11,9 @@ const MiddlePart = ({ obstacleCoordinates }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <APIProvider apiKey='AIzaSyA3FI5Drj0upmW8XuoDARw8XY04I4_reBg'>
+    <APIProvider apiKey='....'>
       <div style={{ height: isMobile ? '50vh' : '100vh', width: '100%', paddingTop: isMobile ? '10px' : '5%' }}>
-        <Map defaultZoom={13} defaultCenter={position} mapId={'265415f1e59bc082'} disableDefaultUI>
+        <Map defaultZoom={13} defaultCenter={position} mapId={'....'} disableDefaultUI>
           {obstacleCoordinates.map((obstacle, index) => (
             <AdvancedMarker
               key={index}
